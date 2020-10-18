@@ -24,6 +24,15 @@ paddle_a.shapesize(stretch_wid=5, stretch_len=1)
 paddle_a.penup()
 paddle_a.goto(-350, 0)
 
+#Goal_a 
+goal_a = turtle.Turtle()
+goal_a.speed(0)
+goal_a.shape('square')
+goal_a.color('#00ECFF')
+goal_a.shapesize(stretch_wid=15, stretch_len=0.2)
+goal_a.penup()
+goal_a.goto(-395, 0)
+
 #Paddle B
 
 paddle_b = turtle.Turtle()
@@ -33,6 +42,15 @@ paddle_b.color("#3BFF00")
 paddle_b.shapesize(stretch_wid=5, stretch_len=1)
 paddle_b.penup()
 paddle_b.goto(350, 0)
+
+#Goal_b
+goal_b = turtle.Turtle()
+goal_b.speed(0)
+goal_b.shape('square')
+goal_b.color('#00ECFF')
+goal_b.shapesize(stretch_wid=15, stretch_len=0.2)
+goal_b.penup()
+goal_b.goto(388, 0)
 
 #Ball
 
@@ -92,7 +110,7 @@ wn.onkeypress(paddle_b_down, "Down")
 
 
 #Main game loop
-while score_a <= 10 or score_b <= 10:
+while True:
 	wn.update()
 
 	#Move the ball
@@ -100,6 +118,23 @@ while score_a <= 10 or score_b <= 10:
 	ball.sety(ball.ycor() + ball.dy)
 
 	#Border checking 
+
+	if paddle_a.ycor() > 250:
+		paddle_a.sety(250)
+		
+
+	if paddle_a.ycor() < -250:
+		paddle_a.sety(-250)
+		
+
+	if paddle_b.ycor() >250:
+		paddle_b.sety(250)
+		
+
+	if paddle_b.ycor() < -250:
+		paddle_b.sety(-250)
+		
+
 
 	if ball.ycor() > 290:
 		ball.sety(290)
@@ -145,14 +180,16 @@ while score_a <= 10 or score_b <= 10:
 		#winsound.PlaySound("switch.wav", winsound.SND_ASYNC) #FOR WINDOWS
 
 
-	if score_a == 10:
+	if score_a == 1:
 		pen.clear()
+		pen.color("red")
 		pen.write("Player Red Wins!", align="center", font=("Courier", 20, "normal"))
 		os.system("aplay win.wav")
 		turtle.bye()
 		
-	if score_b == 10:
+	if score_b == 1:
 		pen.clear()
+		pen.color("#3BFF00")
 		pen.write("Player Green Wins!", align="center", font=("Courier", 20, "normal"))
 		os.system("aplay win.wav")
 		turtle.bye()
